@@ -24,13 +24,86 @@
     var canvas = document.getElementById('myCanvas');
     paper.setup(canvas);
     var tool = new paper.Tool();
+  var userdict = {};
+   var userColor = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
+    var userNumber = Math.random(); 
 
-    // getting the URL (you may want to use for Exercise 3)
-    var url = window.location.href;
+  
+var context = canvas.getContext('2d');
+var url = window.location.href;
+var socket = new WebSocket('wss://p3-websockets-kaavya99-kaavyasinghal48900.codeanyapp.com/ws/draw');                    
+var secondpath = new paper.Path();
+var stringversion;
+tool.onMouseMove = function (event) {
+  var myX = event.point.x;
+  var myY = event.point.y;
+  var pointevents = {x:event.point.x, y:event.point.y, color: userColor, user: userNumber};
+  stringversion = JSON.stringify(pointevents);
+  socket.send(stringversion);
+}
 
-    // var socket = new WebSocket(
-    //     'wss://<your url here>/ws/draw');
+var smallPath = new paper.Path();
+socket.onmessage = function(e) {
+
+var myUrl = window.location.href;
+if (myUrl.indexOf("large") != -1)
+{
+  var jsonmessage = JSON.parse(e.data);
+  var xcoord = jsonmessage.x;
+  var ycoord = jsonmessage.y;
+  var mycolor = jsonmessage.color;
+  var myuser = jsonmessage.user;
+  if (!(myuser in userdict)) {
+    newpath = new paper.Path();
+    userdict[myuser] = newpath;
+  }
+  userdict[myuser].strokeColor = mycolor;
+  userdict[myuser].strokeWidth = '5';
+  userdict[myuser].add(new paper.Point(xcoord, ycoord));
+  
+}
+else {
+  var jsonmessage = JSON.parse(e.data);
+  
+  var myuser = jsonmessage.user;
+  if (myuser == userNumber) {
+  var xcoord = jsonmessage.x;
+  var ycoord = jsonmessage.y;
+  var mycolor = jsonmessage.color;
+  smallPath.strokeColor = mycolor;
+  smallPath.strokeWidth = '5';
+  smallPath.add(new paper.Point(xcoord, ycoord));
+  console.log("small");
+  }
+}
+}
+  
+  // notify console if socket closes unexpectedly
+  socket.onclose = function(e) {
+    console.error('Chat socket closed unexpectedly');
+  }
+
+$(document).ready(() => {
+window.addEventListener('devicemotion', (event) => {
+  if ((Math.abs(event.acceleration.x) > 10) || (Math.abs(event.acceleration.y) > 10) || (Math.abs(event.acceleration.z) > 10)){
+    paper.project.clear();
+  }
+});
+window.addEventListener('deviceorientation', (event) => {
+  if (Math.abs(gamma) > 15) {
+    userColor = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
+  }
+  
+  
+});
+});
+                       
+                  
 
 
-</script>
+  </script>
+
+  <!-- This index.html is used for Mobile Gesture section ONLY. -->
+  <!-- PLEASE REVERT BACK TO THE ORIGINAL INDEX.HTML FROM STARTER CODE! -->
+
 </html>
