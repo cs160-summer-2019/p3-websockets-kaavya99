@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Schoolbell&display=swap" rel="stylesheet">
+
+  <style>
+   html, body{
+         font-family: 'Shadows Into Light Two', cursive;
+      }
+  #child4 {
+  position: absolute;
+  bottom: 500px;
+    width: 1000px;
+  height: 70px;
+    right: 150px;
+  
+}
+    
+    #logo{
+      font-family: 'Schoolbell', cursive;
+      position: absolute;
+      top: 300px;
+      right: 150px;
+      font-size: 250px;
+      
+    }
+   #child5 {
+  position: absolute;
+  bottom: 600px;
+    width: 1000px;
+  height: 70px;
+    right: 150px;
+    
+}
+     #div {
+ background-image: url("http://2.bp.blogspot.com/-6AL2j4pNww0/Uh99ktRsxtI/AAAAAAAAGX8/u8o9yXAiJpM/s1600/Background-Kids.jpg");
+ background-size: cover;
+ background-repeat: no-repeat;
+}
+   
+   
+  
+  
+  </style>
+  
+  <h1>
+    <br>
+    <br>
+    <br>
+    <img src = "http://1.bp.blogspot.com/-rhEATzSZHCA/VCdOOiLVmpI/AAAAAAAD5_Y/teRo0WeWLq8/s1600/bowling-girls-pretty-clipart-012.png" height = "1500" width = "1500">
+  </h1> 
+  <body id = "div">
+   <div id="logo">
+     DINO DIARIES
+    </div>
+<div class="w3-container">
+
+
+
+
+<div id = "child4" class="w3-light-grey w3-round"> 
+  <div id="myBar" class="w3-container w3-round w3-green w3-center" style="height: 100%;width:100%; font-size: 300%;text-align:center; color: black;"><b><font color = "black">&nbsp;HAPPINESS</font></b></div>
+</div>
+  
+ 
+<div id = "child5" class="w3-light-grey w3-round"> 
+   <div id="myBar2" class="w3-container w3-round w3-red w3-center" style="height: 100%; width:20%; font-size: 300%;text-align:center; color: black;"><b><font color = "black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HEALTH</font></b></div>
+</div>
+
+</div>
+
+<script>
+function move() {
+  var elem = document.getElementById("myBar");   
+  var width = 20;
+  var id = setInterval(frame, 10);
+  elem.className = "w3-green";
+  function frame() {
+    if (width >= 100) {
+      clearInterval(id);
+    } else {
+      width++; 
+      elem.style.color = "black"
+      elem.style.width = width + '%'; 
+      elem.innerHTML = width * 1  + '%';
+    }
+  }
+  
+}
+  function move2() {
+  var elem = document.getElementById("myBar2");  
+    elem.style.color = "green";
+  var width = 20;
+  var id = setInterval(frame, 10);
+    elem.className = "w3-green";
+  function frame() {
+    if (width >= 100) {
+      clearInterval(id);
+    } else {
+      width++; 
+      elem.style.color = "black"
+      elem.style.width = width + '%'; 
+      elem.innerHTML = width * 1  + '%';
+    }
+  }
+}
+  var socket = new WebSocket('wss://p3-websockets-kaavya99-kaavyasinghal48900.codeanyapp.com/ws/draw');           
+    var myUrl = window.location.href;
+  socket.onmessage = function(e) {
+   
+        if (myUrl.indexOf("largeboard") != -1) {
+    console.log("move");
+  move2();
+    
+  }
+  }
+</script>
+
+</body>
+</html> 

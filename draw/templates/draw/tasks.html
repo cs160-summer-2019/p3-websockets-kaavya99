@@ -1,0 +1,186 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Tasks</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald|Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two&display=swap" rel="stylesheet">
+
+
+    <style type="text/css">
+       html, body{
+        
+         font-family: 'Shadows Into Light Two', cursive;
+       }
+      
+      .container { 
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: row;
+        align-items: center;
+        align-content: start;
+        height : 100vh;
+	      width : 100vw;
+        
+        
+      }
+      .break {
+        flex-basis: 100%;
+        height: 0;
+      }
+      .break-space {
+        flex-basis: 100%;
+        height: 70px;
+        font-size: 20px;
+      }
+      
+      .row-space{
+        flex-basis: 2%;
+        height: 40px;
+      }
+      
+      .header{
+        width: 760px;
+        height: 80px;
+        font-size: 45px;
+       
+        padding-bottom: 20px;
+        border-radius: 10px;
+        text-align: center;
+      }
+      
+      .check-box {
+        width: 60px;
+        height: 60px;
+      }
+      
+      .head-shot{
+        width: 40px;
+        height: 40px;
+        background-color: yellow;
+      
+      }
+      
+      .task-box{
+        padding: 2px;
+        width: 545px;
+        height: 50px;
+        text-align: center;
+        border-radius: 10px;
+        font-size: 28px;
+        background-color: orange;
+        opacity: 0.8;
+      }
+      
+      .b {
+        background-color: red;
+      }
+      
+      .g{
+        background-color: green;
+      }
+      
+      
+    </style>
+
+</head>
+<body background="http://www.attachmax.com/p/2018/11/best-50-notepad-wallpaper-on-hipwallpaper-notepad-wallpaper-with-regard-to-yellow-notebook-paper-background-600x600.jpg">
+  
+<header>
+  
+</header>
+  
+  <div class = "container"> 
+    <div class="header">
+       <font color="black"> 
+         Hey - thanks for checking in!
+      </font>
+    </div>
+    <div class = "break"></div>
+    <div class = "break-space">
+      <u> Today's to do list: </u>
+    </div>
+    
+    <div class = "check-box">
+      <button type="button" class="b btn btn-block h-100 b1">
+        X
+      </button>
+    </div>
+    <div class = "row-space"></div>
+    <div class = "task-box">
+      Your Task: Feed Dino Dude!
+    </div>
+    
+    <div class = "break"></div>
+    <div class = "headshot">
+      <img src="">
+    </div>
+    <div class = "check-box">
+      <button type="button" class="g btn btn-block h-100 b2">
+        ✓
+      </button>
+    </div>
+    <div class = "row-space"></div>
+    <div class = "task-box">
+      Anna's Task: Play With Dino Dude
+    </div>
+    
+    <div class = "break"></div>
+    <div class = "headshot"> 
+      <img src="">
+    </div>
+    <div class = "check-box">
+      <button type="button" class="g btn btn-block h-100 b3">
+        ✓
+      </button>
+    </div>
+    <div class = "row-space"></div>
+    <div class = "task-box">
+      Gertrude's Task: Clean Dino Dude
+    </div>
+    <div class = "break"></div>
+    <div class = "headshot">
+      <img src="">
+    </div>
+    <div class = "check-box">
+      <button type="button" class="g btn btn-block h-100 b4">
+        ✓
+      </button>
+    </div>
+    <div class = "row-space"></div>
+    <div class = "task-box">
+      Kai's Task: Walk Dino Dude
+    </div>
+  </div>
+  
+  <script>
+    b1 = $('.b1');
+    b2 = $('.b2');
+    b3 = $('.b3');
+    b4 = $('.b4');
+    var message = "happines";
+   var socket = new WebSocket('wss://p3-websockets-kaavya99-kaavyasinghal48900.codeanyapp.com/ws/draw');           
+    $(document).ready( () => {
+      b1.on('click', ()=> {
+       socket.send(message);
+       b1.css('background-color', 'green')
+       b1.text('✓')
+        // b1.addClass('green)
+        // this.css('color':'green');
+      })
+      
+      }
+    )
+    
+  </script>
+  
+</body>
